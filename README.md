@@ -3,7 +3,7 @@
 - [Prerequisites](#prerequisites)
 - [Content](#content)
   - [Read, process and write CZIs using pylibCZIrw](#read-process-and-write-czis-using-pylibczirw)
-  - [Train a Deep-Learning Model on arivis Cloud](#train-a-deep-learning-model-on-arivis-cloud)
+  - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
     - [Use the model in your python code](#use-the-model-in-your-python-code)
   - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
     - [Train a simple model for semantic segmentation](#train-a-simple-model-for-semantic-segmentation)
@@ -79,11 +79,11 @@ The basic usage can be inferred from this sample notebook:&nbsp;
 
 For more detailed information refer to the pylibCZIrw-documentation.html shipped with the source distribution of this package.
 
-## Train a Deep-Learning Model on arivis Cloud
+## Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
 
 The general idea is to learn how to label a dataset on [arivis Cloud].
 
-Dataset Name: **cyto2022_nuclei**
+Dataset Name: **Smart_Microscopy_Workshop_2025_Nucleus_Semantic**
 
 ![Annotated Dataset](./images/apeer_dataset_nuc.png)
 
