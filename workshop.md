@@ -4,6 +4,9 @@
 - [Prerequisites](#prerequisites)
 - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
   - [Use the model in your python code](#use-the-model-in-your-python-code)
+- [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
+  - [Train a simple model for semantic segmentation](#train-a-simple-model-for-semantic-segmentation)
+  - [Train a simple model for regression](#train-a-simple-model-for-regression)
 
 
 
@@ -108,6 +111,24 @@ For more detailed information please visit: [Docs - Partial Annotations](https:/
 Once the model is trained it can be downloaded directly to your hard disk and used to segment images in ZEN or arivis Pro or your own python code.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
+
+
+## Train your own model and package (as *.czann) using the [czmodel] package
+
+The package provides simple-to-use conversion tools to generate a CZANN file from a [PyTorch] or [ONNX] model that resides in memory or on disk to be usable in the ZEN, arivis Cloud, arivisPro software platforms and also in your own code.
+
+For details and more information examples please go to: [czmodel]
+
+### Train a simple model for semantic segmentation
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/SingleClassSemanticSegmentation_PyTorch.ipynb)
+
+### Train a simple model for regression
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/Regresssion_PyTorch.ipynb)
+
+
+
 
 
 
