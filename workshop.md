@@ -130,6 +130,6 @@ Once the model is trained it can be downloaded directly to your hard
 disk and used to segment images in ZEN or arivis Pro or your own python
 code.
 
-[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zeissmicroscopy/ZEN_Python_OAD_workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
+[![](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
 
 ------------------------------------------------------------------------
