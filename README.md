@@ -2,6 +2,7 @@
 - [Schedule](#schedule)
 - [General Remarks](#general-remarks)
 - [Prerequisites](#prerequisites)
+  - [Install python base  environment (miniconda etc.)](#install-python-base--environment-miniconda-etc)
 - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
   - [Use the model in your python code](#use-the-model-in-your-python-code)
 - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
@@ -83,15 +84,27 @@ This repository contains scripts and notebooks showcasing several tools and scri
 
 ## Prerequisites
 
+### Install python base  environment (miniconda etc.)
+
+- Download and install Miniconda if needed: [Download Miniconda](https://www.anaconda.com/download/success)
+- Install Jupyter & Co
+
+```cmd
+conda activate base
+conda install jupyterlab jupyter_server nb_conda_kernels
+```
+
 To run the notebooks locally it is recommended to create a fresh conda environment. Please feel free to use the provided [YML file](workshop/env_smartmic.yml) (at your own risk) to create such an environment:
 
-    conda env create --file zen_python.yml
+```cmd
+conda env create --file zen_smartmic.yml
+```
 
 > Important: If one wants to test the labeling & training directly on [arivis Cloud] or create a module it is required to have an account.
 >
 > To use [Colab] one needs to have a Google account.
 >
-> To test and run an [arivis Cloud] module locally one needs [Docker Desktop] or an equivalent runtime installed
+> To test and run an [arivis Cloud] module locally one needs [Docker Desktop] installed.
 
 ## Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
 
