@@ -80,7 +80,7 @@ To run the notebooks locally it is recommended to create a fresh conda environme
     conda env create --file zen_python.yml
 
 > Important: If one wants to test the labeling & training directly on [arivis Cloud] or create a module it is required to have an account.
-> 
+>
 > To use [Colab] one needs to have a Google account.
 >
 > To test and run an [arivis Cloud] module locally one needs [Docker Desktop] or an equivalent runtime installed
@@ -101,17 +101,15 @@ Dataset Name: **Smart_Microscopy_Workshop_2025_Nucleus_Semantic**
 
 - start a training to get a trained model as a *.czann file
 
-Remark: The the modelfile: **cyto2022_nuc.czann** can be found inside the repository.
+Remark: The the modelfile: **cyto2022_nuc2.czann** can be found inside the repository.
 
 For more detailed information please visit: [Docs - Partial Annotations](https://docs.apeer.com/machine-learning/annotation-guidelines)
-
 
 ### Use the model in your python code
 
 Once the model is trained it can be downloaded directly to your hard disk and used to segment images in ZEN or arivis Pro or your own python code.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
-
 
 ## Train your own model and package (as *.czann) using the [czmodel] package
 
@@ -127,10 +125,19 @@ For details and more information examples please go to: [czmodel]
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/Regresssion_PyTorch.ipynb)
 
+## Use the model inside Napari (optional)
 
+In order to use such a model one needs a running python environment with [Napari] and the napari-czann-segment plugin installed.
 
+It can install it via [pip]:
 
+    pip install napari-czann-segment
 
+For more detailed information about the plugin please go to: [Napari Hub - napari-czann-segment](https://www.napari-hub.org/plugins/napari-czann-segment)
+
+![Train on arivis Cloud and use model in Napari](https://github.com/sebi06/napari-czann-segment/raw/main/readme_images/Train_APEER_run_Napari_CZANN_no_highlights_small.gif)
+
+# Links
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
