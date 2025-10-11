@@ -170,3 +170,4 @@ cython_debug/
 /workshop/notebooks/newczi_tilewise.czi
 /workshop/notebooks/newCZI_uncompressed.czi
 /workshop/notebooks/newCZI_z=16_ch=3.czi
+/workshop/notebooks/newCZI_stack.czi
