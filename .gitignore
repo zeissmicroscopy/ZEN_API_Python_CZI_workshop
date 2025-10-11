@@ -171,3 +171,5 @@ cython_debug/
 /workshop/notebooks/newCZI_uncompressed.czi
 /workshop/notebooks/newCZI_z=16_ch=3.czi
 /workshop/notebooks/newCZI_stack.czi
+/workshop/data/CellDivision_T10_Z15_CH2_DCV_small_ngff.ome.zarr
+/workshop/data/WP96_4Pos_B4-10_DAPI_ngff.ome.zarr
