@@ -7,7 +7,15 @@
 - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
   - [Train a simple model for semantic segmentation](#train-a-simple-model-for-semantic-segmentation)
   - [Train a simple model for regression](#train-a-simple-model-for-regression)
-
+- [Use the model inside Napari (optional)](#use-the-model-inside-napari-optional)
+- [Using the czitools package (experimental)](#using-the-czitools-package-experimental)
+  - [Read CZI metadata](#read-czi-metadata)
+  - [Read CZI pixeldata](#read-czi-pixeldata)
+  - [Write OME-ZARR from 5D CZI image data](#write-ome-zarr-from-5d-czi-image-data)
+  - [Write CZI using ZSTD compression](#write-czi-using-zstd-compression)
+  - [Show planetable of a CZI image as surface](#show-planetable-of-a-czi-image-as-surface)
+  - [Read a CZI and segment using Voroni-Otsu provided by PyClesperanto GPU processing](#read-a-czi-and-segment-using-voroni-otsu-provided-by-pyclesperanto-gpu-processing)
+- [Links](#links)
 
 
 Smart Microscopy On-site Workshop: **From Zero to Hero with ZEN and Open-Source Tools**
@@ -168,7 +176,7 @@ For details please visit: [czitools]
 
 
 
-# Links
+## Links
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
