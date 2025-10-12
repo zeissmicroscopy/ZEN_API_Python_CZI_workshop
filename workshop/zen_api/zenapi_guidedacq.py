@@ -16,11 +16,11 @@ import asyncio
 import numpy as np
 from pathlib import Path
 from zen_api_utils.misc import initialize_zenapi, set_logging
-from zen_api_utils.misc import TileRegionRectangle, TileRegionPolygon, TileRegionEllipse
+from zen_api_utils.tiles_positions import TileRegionRectangle, TileRegionPolygon, TileRegionEllipse
 import zen_tcpip_commands
 from zen_tcpip import ZenCommands
 from processing_tools import segment_czi
-from czitools.utils import misc
+from czitools.utils import misc, planetable
 from tqdm import trange
 from datetime import datetime
 import shutil
@@ -275,14 +275,14 @@ async def main():
     # Get the current date and time
     now = datetime.now()
 
-    # Format the date and time as a string
+    # Format the date and time as a string  
     timestamp_folder = now.strftime("%Y-%m-%d_%H-%M-%S")
 
     # read the planetable to derive a Z-value for the TileRegion modification
-    planetable = misc.get_planetable(filepath_overview, pt_complete=False, t=0, c=0, z=0)
+    pt, savepath = planetable.get_planetable(filepath_overview, save_table=False, planes={"time": 0, "channel": 0, "zplane": 0})
 
     # get the median Z-value
-    zvalue_image = np.round(planetable.loc[:, "Z[micron]"].median(), 2)
+    zvalue_image = np.round(pt.loc[:, "Z[micron]"].median(), 2)
 
     # get the gRPC channel and the metadata
     channel, metadata = initialize_zenapi(configfile)

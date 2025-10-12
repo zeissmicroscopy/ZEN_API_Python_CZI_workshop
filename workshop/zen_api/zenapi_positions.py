@@ -16,7 +16,7 @@ import asyncio
 import sys
 from pathlib import Path
 from zen_api_utils.misc import set_logging, initialize_zenapi
-from zenapi_experiment_tools import save_experiment, delete_czifile
+from zenapi_experiment_tools import save_experiment
 
 # import the auto-generated python modules
 from zen_api.acquisition.v1beta import (
