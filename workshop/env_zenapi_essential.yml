@@ -1,0 +1,75 @@
+# Tested on Windows only (but should also work for Linux)
+#
+# Disclaimer:
+#
+# The author(s) undertakes no warranty concerning the use of this YML file. Use at your own risk.
+# By using any of those examples you agree to this disclaimer.
+
+name: zenapi
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - colormap
+  - czifile
+  - docutils
+  - fsspec
+  - ipyfilechooser
+  - ipykernel
+  - magicgui
+  - matplotlib
+  - napari>=0.6.5
+  - ome-zarr
+  - pandas
+  - pip
+  - pooch
+  - pyqt=5
+  - pyqtgraph
+  - pytest
+  - pytest-cov
+  - qasync
+  - requests
+  - scikit-image>=0.19.3
+  - seaborn
+  - setuptools
+  - shapely
+  - superqt
+  - tqdm
+  - validators
+  - wheel
+
+  - pip:
+      - aicspylibczi>=3.3.1
+      - betterproto==2.0.0b7 # sometimes this does not get installed - try manually
+      - betterproto[compiler]==2.0.0b7 # sometimes this does not get installed - try manually
+      - cztile
+      - czitools
+      - grpclib
+      - loguru
+      - napari-brightness-contrast
+      - napari-crop
+      - napari-czitools
+      - napari-layer-details-display
+      - napari-ome-zarr
+      - napari-plugin-search
+      - ngff-zarr
+      - ngff-zarr[dask-image]
+      - ngff-zarr[validate]
+      - pylibCZIrw
+      - ryomen
+      - tiler
+      - wigglystuff
+
+# Create an environment - use conda or mamba
+# conda env create --file env_zenapi_essential.yml
+
+# Update an environment
+# conda env update --name zenapi --file env_zenapi_essential.yml --prune
+
+# Remove an environment
+# conda remove --name zenapi --all
+# conda clean --all
+
+# Show the locations of all versions of Python that are currently in the path
+# Windows: where python
+# Linux which -a python
