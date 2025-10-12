@@ -39,8 +39,8 @@ dependencies:
   - pyqtgraph
   - pytest
   - pytest-cov
-  - pytorch
-  - pytorch-cuda=12.4
+  - pytorch::pytorch=2.5.1
+  - pytorch::pytorch-cuda=12.4
   - python-box[all]
   - python-dateutil
   - qasync
@@ -50,7 +50,8 @@ dependencies:
   - setuptools
   - shapely
   - superqt
-  - torchvision
+  - pytorch::torchvision
+  #- pytorch::torchvision=0.20.1
   - tqdm
   - validators
   - wheel

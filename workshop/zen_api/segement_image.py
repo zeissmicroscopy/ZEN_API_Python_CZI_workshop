@@ -2,7 +2,7 @@ from processing_tools import segment_czi
 from pylibCZIrw import czi as pyczi
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
-from zenapi_tools import set_logging
+from zen_api_utils.misc import set_logging
 
 logger = set_logging()
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #################################################################
-# File        : zenapi_workflow_tools.py
+# File        : workflow.py
 # Author      : SRh
 # Institution : Carl Zeiss Microscopy GmbH
 #
@@ -38,7 +38,7 @@ from zen_api.workflows.v1beta import (
     # JobResourcesServiceGetLongValueRequest
 )
 
-from zenapi_tools import set_logging
+from zen_api_utils.misc import set_logging
 from typing import List, Optional, Dict
 
 logger = set_logging()
@@ -75,9 +75,7 @@ async def get_job_templates(
         List[JobTemplateInfo]: A list of available job templates.
     """
     response = await workflow_service.get_available_job_templates(
-        WorkflowServiceGetAvailableJobTemplatesRequest(
-            category=category, subcategory=subcategory
-        )
+        WorkflowServiceGetAvailableJobTemplatesRequest(category=category, subcategory=subcategory)
     )
     return response.job_templates
 
@@ -126,9 +124,7 @@ async def get_resource_ids(job_resources_service: JobResourcesServiceStub) -> Li
     Returns:
     - List[str]: A list of available resource IDs.
     """
-    response = await job_resources_service.get_available_resources(
-        JobResourcesServiceGetAvailableResourcesRequest()
-    )
+    response = await job_resources_service.get_available_resources(JobResourcesServiceGetAvailableResourcesRequest())
     return response.resource_ids
 
 
@@ -186,9 +182,7 @@ async def monitor_status(workflow_service: WorkflowServiceStub) -> None:
         None
     """
     request = WorkflowServiceRegisterOnStatusChangedRequest()
-    async for response in workflow_service.register_on_status_changed(
-        request, timeout=10
-    ):
+    async for response in workflow_service.register_on_status_changed(request, timeout=10):
         logger.info(f"--> Status changed to: {response.job_status}")
 
         if response.job_status == JobStatus.NOT_LOADED:
@@ -230,9 +224,7 @@ async def run_job(
     if result_path is None:
         logger.info(f"Loading job template: {job_template_name}")
     else:
-        logger.info(
-            f'Loading job template "{job_template_name}" with result path "{result_path}"'
-        )
+        logger.info(f'Loading job template "{job_template_name}" with result path "{result_path}"')
     request = WorkflowServiceLoadJobTemplateRequest(job_template_name, result_path)
     await workflow_service.load_job_template(request)
 
@@ -251,30 +243,22 @@ async def run_job(
 
                 if isinstance(v, int):
 
-                    request = JobResourcesServiceSetIntegerValueRequest(
-                        resource_id=k, value=v
-                    )
+                    request = JobResourcesServiceSetIntegerValueRequest(resource_id=k, value=v)
                     await job_resources_service.set_integer_value(request)
 
                 elif isinstance(v, float):
 
-                    request = JobResourcesServiceSetFloatValueRequest(
-                        resource_id=k, value=v
-                    )
+                    request = JobResourcesServiceSetFloatValueRequest(resource_id=k, value=v)
                     await job_resources_service.set_float_value(request)
 
                 elif isinstance(v, bool):
 
-                    request = JobResourcesServiceSetBooleanValueRequest(
-                        resource_id=k, value=v
-                    )
+                    request = JobResourcesServiceSetBooleanValueRequest(resource_id=k, value=v)
                     await job_resources_service.set_boolean_value(request)
 
                 elif isinstance(v, str):
 
-                    request = JobResourcesServiceSetStringValueRequest(
-                        resource_id=k, value=v
-                    )
+                    request = JobResourcesServiceSetStringValueRequest(resource_id=k, value=v)
                     await job_resources_service.set_string_value(request)
 
                 else:
@@ -321,8 +305,6 @@ async def get_job_resource_ids(
     """
 
     # show the resource_ids of the current job
-    resources = await job_resources_service.get_available_resources(
-        JobResourcesServiceGetAvailableResourcesRequest()
-    )
+    resources = await job_resources_service.get_available_resources(JobResourcesServiceGetAvailableResourcesRequest())
 
     return resources.resources

@@ -28,7 +28,7 @@ from zen_api.acquisition.v1beta import (
 
 from dataclasses import dataclass
 from typing import List
-from zenapi_tools import set_logging
+from zen_api_utils.misc import set_logging
 from pathlib import Path
 
 logger = set_logging()

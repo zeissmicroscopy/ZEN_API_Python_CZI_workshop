@@ -22,7 +22,7 @@ import matplotlib.cm as cm
 from typing import Dict, Union
 from pathlib import Path
 import time
-from zenapi_tools import set_logging, initialize_zenapi
+from zen_api_utils.misc import set_logging, initialize_zenapi
 
 # import the auto-generated python modules
 from zen_api.acquisition.v1beta import (

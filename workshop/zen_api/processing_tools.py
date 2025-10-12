@@ -27,8 +27,8 @@ from skimage.color import label2rgb
 from skimage.util import invert
 import numpy as np
 
-# from zenapi_tools import get_logger
-from zenapi_tools import set_logging
+# from zen_api_utils.misc import get_logger
+from zen_api_utils.misc import set_logging
 from onnx_inference import OnnxInferencer
 import pandas as pd
 import os

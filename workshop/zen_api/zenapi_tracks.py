@@ -15,7 +15,7 @@
 import asyncio
 import sys
 from pathlib import Path
-from zenapi_tools import set_logging, initialize_zenapi
+from zen_api_utils.misc import set_logging, initialize_zenapi
 from zenapi_experiment_tools import show_track_info_LM
 
 # import the auto-generated python modules
@@ -34,8 +34,6 @@ from zen_api.lm.acquisition.v1beta import (
     TrackServiceDeactivateChannelRequest,
     TrackServiceStub,
 )
-
-# TODO - 2024-11-05 --> still needs to be merged to develop, only works in feature branch
 
 configfile = r"config.ini"
 expname = "ZEN_API_Tracks_LSM"
@@ -74,12 +72,6 @@ async def main(args):
         ExperimentServiceCloneRequest(experiment_id=my_exp.experiment_id)
     )
 
-    # # modify the track status
-    # await track_service.activate_track(
-    #     TrackServiceActivateTrackRequest(
-    #         experiment_id=my_exp_cloned.experiment_id, track_index=0
-    #     )
-    # )
     await track_service.deactivate_track(
         TrackServiceDeactivateTrackRequest(
             experiment_id=my_exp_cloned.experiment_id, track_index=1

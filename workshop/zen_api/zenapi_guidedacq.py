@@ -15,8 +15,8 @@
 import asyncio
 import numpy as np
 from pathlib import Path
-from zenapi_tools import initialize_zenapi, set_logging
-from zenapi_tools import TileRegionRectangle, TileRegionPolygon, TileRegionEllipse
+from zen_api_utils.misc import initialize_zenapi, set_logging
+from zen_api_utils.misc import TileRegionRectangle, TileRegionPolygon, TileRegionEllipse
 import zen_tcpip_commands
 from zen_tcpip import ZenCommands
 from processing_tools import segment_czi

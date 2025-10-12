@@ -15,7 +15,7 @@
 import asyncio
 import sys
 from pathlib import Path
-from zenapi_tools import set_logging, initialize_zenapi
+from zen_api_utils.misc import set_logging, initialize_zenapi
 from pylibCZIrw import czi as pyczi
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm

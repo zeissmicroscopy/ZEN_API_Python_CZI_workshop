@@ -15,7 +15,7 @@
 import asyncio
 import sys
 from pathlib import Path
-from zenapi_tools import set_logging, initialize_zenapi
+from zen_api_utils.misc import set_logging, initialize_zenapi
 from zenapi_experiment_tools import show_swaf_info_LM, save_experiment
 from grpclib import GRPCError
 
@@ -38,11 +38,8 @@ from zen_api.lm.acquisition.v1beta import (
 
 # import the auto-generated python modules
 from zen_api.lm.hardware.v2 import (
-    # StageServiceStub,
     StageServiceGetPositionRequest,
-    # StageServiceMoveToRequest,
     FocusServiceStub,
-    # FocusServiceGetPositionRequest,
 )
 
 configfile = r"config.ini"
