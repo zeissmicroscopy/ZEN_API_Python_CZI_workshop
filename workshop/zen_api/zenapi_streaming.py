@@ -460,7 +460,11 @@ if __name__ == "__main__":
     processing = Processing.SEG_SEMANTIC  # --> cyto2022_nuc2.czann
     # processing = Processing.DENOISE  # --> LiveDenoise_DAPI.czann
 
-    configfile = r"config.ini"  # use the correct path
+    # Get the directory where the current script is located
+    script_dir = Path(__file__).parent
+
+    # Build the path to config.ini relative to the script
+    config_path = script_dir / "config.ini"
 
     #czann_filepath = r"F:\Github\ZEN_Python_CZI_Smart_Microscopy_Workshop\workshop\zen_api\ai_models\simple_pytorch_nuclei_segmodel_pytorch.czann"
     czann_filepath = r"F:\Github\ZEN_Python_CZI_Smart_Microscopy_Workshop\workshop\zen_api\ai_models\cyto2022_nuc2.czann"
@@ -469,7 +473,7 @@ if __name__ == "__main__":
     logger = set_logging()
 
     main(
-        configfile=configfile,
+        configfile=config_path,
         pixeltype=np.dtype(np.uint16),  # must match experiment output
         czi_name="zenapi_test",
         start_experiment_from_UI=True,

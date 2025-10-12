@@ -41,8 +41,12 @@ from zen_api.lm.hardware.v2 import (
     FocusServiceStub,
 )
 
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
 
-configfile = r"config.ini"
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
+
 expname = "ZEN_API_ZStack"
 expname_mod1 = "ZEN_API_ZStack_mod1"
 expname_mod2 = "ZEN_API_ZStack_mod2"
@@ -56,7 +60,7 @@ exp_folder = Path(r"f:\Documents\Carl Zeiss\ZEN\Documents\Experiment Setups")
 async def main(args):
 
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # create the experiment service
     exp_service = ExperimentServiceStub(channel=channel, metadata=metadata)

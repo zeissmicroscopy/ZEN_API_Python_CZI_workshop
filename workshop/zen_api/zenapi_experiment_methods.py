@@ -53,9 +53,13 @@ exp_cloned_name = "ZEN_API_Test_w96_1024x1024_CH=2_cloned"
 image_folder = Path(r"f:\Zen_Output\temp")
 czi_name = "zenapi_myimage"
 waittime = 3
-configfile = "config.ini"
 open_czi = True
 
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
+
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
 
 # this is the main test script
 async def check_experiment_api(experiment_name: str, configfile: str = "config.ini") -> Dict[str, Union[str, Path]]:
@@ -197,7 +201,7 @@ if __name__ == "__main__":
     logger = set_logging()
 
     # run the main function to check zen api methods
-    results = asyncio.run(check_experiment_api(experiment_name=my_experiment, configfile=configfile))
+    results = asyncio.run(check_experiment_api(experiment_name=my_experiment, configfile=config_path))
 
     logger.info(results)
 

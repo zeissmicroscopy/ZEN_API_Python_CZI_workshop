@@ -38,12 +38,16 @@ my_experiment = "ZEN_API_Test_w96_1024x1024_CH=2"
 image_folder = Path(r"f:\Zen_Output\temp")
 overwrite = True
 open_czi = True
-configfile = r"config.ini"
 
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
+
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
 
 async def main(args):
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # create the experiment service
     exp_service = ExperimentServiceStub(channel=channel, metadata=metadata)

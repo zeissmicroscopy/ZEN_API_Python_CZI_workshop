@@ -257,7 +257,12 @@ async def main():
     detail_exp = "ZEN_API_GuidedAcq"
 
     # general parameters
-    configfile = r"config.ini"
+ 
+    # Get the directory where the current script is located
+    script_dir = Path(__file__).parent
+
+    # Build the path to config.ini relative to the script
+    config_path = script_dir / "config.ini"
     open_detail = False
     region_type = "polygon"
     show_segresults = True
@@ -285,7 +290,7 @@ async def main():
     zvalue_image = np.round(pt.loc[:, "Z[micron]"].median(), 2)
 
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # create the experiment service
     exp_service = ExperimentServiceStub(channel=channel, metadata=metadata)

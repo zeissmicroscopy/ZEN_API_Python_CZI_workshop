@@ -14,17 +14,8 @@
 
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from typing import Optional, Union
+from pathlib import Path
 
-# import the auto-generated python modules
-# from zen_api.hardware.v1 import (
-#     AxisIdentifier,
-#     StageAxis,
-    
-#     StageServiceGetStagePositionRequest,
-    
-#     StageServiceGetStagePositionResponse,
-# )
 
 # import the auto-generated python modules
 from zen_api.lm.hardware.v2 import (
@@ -33,9 +24,7 @@ from zen_api.lm.hardware.v2 import (
     FocusServiceStub,
     StageServiceGetPositionRequest,
     StageServiceMoveToRequest,
-    StageServiceStub,
-    StageServiceGetPositionRequest,
-    StageServiceGetPositionResponse,
+    StageServiceStub
 )
 
 from zen_api_utils.misc import set_logging
@@ -111,18 +100,25 @@ class StageMark:
 
 
 # Function to parse the XML file and create a list of StageMark objects
-def parse_stage_marks(file_path):
+def parse_stage_marks(file_path: str | Path):
     """
     Parses an XML file to extract StageMark elements and their attributes.
+    
     Args:
-        file_path (str): The path to the XML file to be parsed.
+        file_path (str | Path): The path to the XML file to be parsed. 
+                                Can be a string or Path object.
+    
     Returns:
         list: A list of StageMark objects, each representing a StageMark element
               from the XML file. Each object contains the attributes:
-              - item_index (str): The ItemIndex attribute of the StageMark.
-              - x (str): The X attribute of the StageMark.
-              - y (str): The Y attribute of the StageMark.
-              - z (str): The Z attribute of the StageMark.
+              - index (int): The ItemIndex attribute (converted to zero-based).
+              - x (float): The X coordinate in meters.
+              - y (float): The Y coordinate in meters.
+              - z (float): The Z coordinate in meters.
+    
+    Raises:
+        FileNotFoundError: If the XML file does not exist.
+        ET.ParseError: If the XML file is malformed.
 
     Example File Content:
         <?xml version="1.0" encoding="utf-8"?>
@@ -137,8 +133,13 @@ def parse_stage_marks(file_path):
         <StageMark ItemIndex="8" X="56196.024" Y="18869.491" Z="-8000" />
         </StageMarks>
     """
+    # Convert to Path object and check if file exists
+    xml_path = Path(file_path)
+    if not xml_path.exists():
+        raise FileNotFoundError(f"XML file not found: {xml_path}")
+    
     # Parse the XML file
-    tree = ET.parse(file_path)
+    tree = ET.parse(xml_path)
     root = tree.getroot()
 
     # List to store StageMark objects

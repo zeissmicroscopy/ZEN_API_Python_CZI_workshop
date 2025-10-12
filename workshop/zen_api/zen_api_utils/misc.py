@@ -46,27 +46,44 @@ def set_logging():
 
 
 def initialize_zenapi(
-    config_file: str = "config.ini",
+    config_file: str | Path = "config.ini",
 ) -> Tuple[Channel, List[Tuple[str, str]]]:
     """
     Create an gRPC channel for ZEN-API using the specified configuration file.
 
     Args:
-        config_file (str): Path to the configuration file.
+        config_file (str | Path): Path to the configuration file. Can be a string or Path object.
+                                   If a relative path is provided, it will be resolved relative
+                                   to the current working directory. Defaults to "config.ini".
 
     Returns:
         Tuple consisting of gRPC Channel and metadata as a list of tuples.
+
+    Raises:
+        FileNotFoundError: If the configuration file does not exist.
     """
+
+    # Convert to Path object and resolve to absolute path
+    config_path = Path(config_file).resolve()
+    
+    # Check if config file exists
+    if not config_path.exists():
+        raise FileNotFoundError(f"Configuration file not found: {config_path}")
 
     # get the configuration
     config = configparser.ConfigParser()
-    config.read(config_file)
+    config.read(config_path)
 
     # Create SSL context
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
-    # Load a “certification authority” (CA) certificate
-    context.load_verify_locations(cafile=config["api"]["cert_file"])
+    # Load a "certification authority" (CA) certificate
+    # Resolve cert_file path relative to config file location if it's relative
+    cert_file = Path(config["api"]["cert_file"])
+    if not cert_file.is_absolute():
+        cert_file = (config_path.parent / cert_file).resolve()
+    
+    context.load_verify_locations(cafile=str(cert_file))
     context.verify_mode = ssl.CERT_REQUIRED
     context.check_hostname = True
 

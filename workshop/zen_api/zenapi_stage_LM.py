@@ -13,6 +13,7 @@
 #################################################################
 
 import asyncio
+from pathlib import Path
 import numpy as np
 import sys
 from zen_api_utils.misc import set_logging, initialize_zenapi
@@ -32,13 +33,16 @@ from zen_api.lm.hardware.v2 import (
     StageServiceMoveToRequest,
 )
 
-configfile = r"F:\Github\ZEN_Python_CZI_Smart_Microscopy_Workshop\workshop\zen_api\config.ini"
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
 
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
 
 async def main(args):
 
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # get stage service
     simple_stage_service = StageServiceStub(channel=channel, metadata=metadata)

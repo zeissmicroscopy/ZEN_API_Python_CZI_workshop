@@ -9,15 +9,10 @@ from skimage.morphology import (
     white_tophat,
     black_tophat,
     disk,
-    #square,
     ball,
-    #closing,
-    #square,
 )
-#from skimage.filters import median, gaussian
 import pandas as pd
 from tqdm.contrib.itertools import product
-#from typing import List, Dict, Tuple, Optional, Type, Any, Union
 import matplotlib.pyplot as plt
 
 

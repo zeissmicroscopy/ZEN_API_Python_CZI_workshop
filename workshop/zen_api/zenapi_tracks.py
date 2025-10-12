@@ -16,7 +16,7 @@ import asyncio
 import sys
 from pathlib import Path
 from zen_api_utils.misc import set_logging, initialize_zenapi
-from zenapi_experiment_tools import show_track_info_LM
+from zen_api_utils.experiment import show_track_info_LM
 
 # import the auto-generated python modules
 from zen_api.acquisition.v1beta import (
@@ -35,7 +35,12 @@ from zen_api.lm.acquisition.v1beta import (
     TrackServiceStub,
 )
 
-configfile = r"config.ini"
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
+
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
+
 expname = "ZEN_API_Tracks_LSM"
 expname_cloned = "ZEN_API_Tracks_LSM_cloned"
 image_folder = Path(r"f:\Zen_Output\temp")
@@ -45,7 +50,7 @@ exp_folder = Path(r"f:\Documents\Carl Zeiss\ZEN\Documents\Experiment Setups")
 async def main(args):
 
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # create the experiment service
     exp_service = ExperimentServiceStub(channel=channel, metadata=metadata)

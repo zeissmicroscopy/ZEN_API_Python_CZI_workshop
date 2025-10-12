@@ -35,13 +35,18 @@ from zen_api.lm.acquisition.v1beta import (
 
 exp_folder = Path(r"f:\Documents\Carl Zeiss\ZEN\Documents\Experiment Setups")
 my_experiments = ["ZEN_API_TileRegion_Test"]  # , "ZEN_API_TileRegion_Test_notiles"]
-configfile = r"config.ini"
+
+# Get the directory where the current script is located
+script_dir = Path(__file__).parent
+
+# Build the path to config.ini relative to the script
+config_path = script_dir / "config.ini"
 
 
 async def main(args):
 
     # get the gRPC channel and the metadata
-    channel, metadata = initialize_zenapi(configfile)
+    channel, metadata = initialize_zenapi(config_path)
 
     # create the experiment service
     exp_service = ExperimentServiceStub(channel=channel, metadata=metadata)
