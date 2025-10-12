@@ -37,7 +37,7 @@
     - [Convert CZI to OME-ZARR using ngff-zarr](#convert-czi-to-ome-zarr-using-ngff-zarr)
     - [Convert CZI to OME-ZARR HCS Plate using ome-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ome-zarr)
     - [Convert CZI to OME-ZARR HCS Plate using ngff-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ngff-zarr)
-  - [Ueful Links](#ueful-links)
+  - [Useful Links](#useful-links)
 
 ## Disclaimer
 
@@ -336,30 +336,23 @@ See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_omezarr.py)
 
 See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
 
-## Ueful Links
+## Useful Links
 
-- [Napari - Python-based image viewer](https://github.com/napari/napari)
-- [pip - Python Package Installer](https://pypi.org/project/pip/)
-- [PyPi - Python Package Index](https://pypi.org/)
-- [pylibCZIrw - Python Package to read & write CZI files](https://pypi.org/project/pylibCZIrw)
-- [pylibCZIrw - GitHub Repository for reading & writing CZI image files (Python](https://github.com/ZEISS/pylibczirw)
-- [czmodel - Python Package for packaging Pytorch & ONNX models in a standardized exchange format](https://pypi.org/project/czmodel)
-- [cztile - Python Package for tiling arrays](https://pypi.org/project/cztile)
-- [arivis Cloud - DL Training Platform](https://www.arivis.cloud)
-- [napari-czann-segment - Napari Plugin to use DL models](https://github.com/sebi06/napari_czann_segment)
-- [napari-czitools - Napari Plugin to read CZI image files and their metadata](https://github.com/sebi06/napari-czitools)
-- [CZI - Carl Zeiss Image Format (open file format for microscopy images)](https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html)
-- [PyTorch](https://pytorch.org)
-- [ONNX](https://onnx.ai)
-- [libCZI - Github Repository for reading & writing CZI image files (C++)](https://github.com/ZEISS/libczi)
-- [czitools - Python Package providing tools to handle CZI image files ](https://pypi.org/project/czitools)
-- [Colab](https://colab.research.google.com)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- [CZICompress - Shrink CZI files](https://github.com/ZEISS/czicompress)
-- [CZIChecker - Check Integrity of CZI files](https://github.com/ZEISS/czicheck)
-- [ome-zarr - Python Implementation of NGFF](https://github.com/ome/ome-zarr-py)
-- [NGFF - Next-generation File Formats](https://ngff.openmicroscopy.org/)
-- [ngff-zarr - Python Implementation of NGFF](https://github.com/fideus-labs/ngff-zarr)
+---
+
+| Name/Description                                      | Link                                                                                    | Name/Description                                      | Link                                                |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| Napari - Python-based image viewer                    | [GitHub](https://github.com/napari/napari)                                              | pip - Python Package Installer                        | [PyPI](https://pypi.org/project/pip/)               |
+| PyPi - Python Package Index                           | [PyPI](https://pypi.org/)                                                               | pylibCZIrw - Python Package to read & write CZI files | [PyPI](https://pypi.org/project/pylibCZIrw)         |
+| pylibCZIrw - GitHub Repository for CZI files (Python) | [GitHub](https://github.com/ZEISS/pylibczirw)                                           | czmodel - Package for Pytorch & ONNX models           | [PyPI](https://pypi.org/project/czmodel)            |
+| cztile - Python Package for tiling arrays             | [PyPI](https://pypi.org/project/cztile)                                                 | arivis Cloud - DL Training Platform                   | [arivis Cloud](https://www.arivis.cloud)            |
+| napari-czann-segment - Napari Plugin for DL models    | [GitHub](https://github.com/sebi06/napari_czann_segment)                                | napari-czitools - Plugin for CZI files                | [GitHub](https://github.com/sebi06/napari-czitools) |
+| CZI - Carl Zeiss Image Format                         | [ZEISS](https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html) | PyTorch                                               | [PyTorch](https://pytorch.org)                      |
+| ONNX                                                  | [ONNX](https://onnx.ai)                                                                 | libCZI - GitHub Repository for CZI files (C++)        | [GitHub](https://github.com/ZEISS/libczi)           |
+| czitools - Tools for CZI files                        | [PyPI](https://pypi.org/project/czitools)                                               | Colab                                                 | [Colab](https://colab.research.google.com)          |
+| Docker Desktop                                        | [Docker Desktop](https://www.docker.com/products/docker-desktop)                        | CZICompress - Shrink CZI files                        | [GitHub](https://github.com/ZEISS/czicompress)      |
+| CZIChecker - Check Integrity of CZI files             | [GitHub](https://github.com/ZEISS/czicheck)                                             | ome-zarr - Python Implementation of NGFF              | [GitHub](https://github.com/ome/ome-zarr-py)        |
+| NGFF - Next-generation File Formats                   | [NGFF](https://ngff.openmicroscopy.org/)                                                | ngff-zarr - Python Implementation of NGFF             | [GitHub](https://github.com/fideus-labs/ngff-zarr)  |
 
 ---
 
