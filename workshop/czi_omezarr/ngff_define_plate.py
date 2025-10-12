@@ -1,4 +1,11 @@
-from ome_zarr_utils import define_plate, define_plate_by_well_count, PlateType, PLATE_FORMATS
+import sys
+from pathlib import Path
+
+# Add the workshop directory to the Python path BEFORE importing from utils
+workshop_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(workshop_dir))
+
+from utils.ome_zarr_utils import define_plate, define_plate_by_well_count, PlateType, PLATE_FORMATS
 
 
 # Example usage:

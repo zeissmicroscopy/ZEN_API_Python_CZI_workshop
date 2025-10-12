@@ -1,10 +1,16 @@
-from ome_zarr_utils import convert_czi_to_hcs_zarr
-from plotting_utils import create_well_plate_heatmap
+import sys
 import ngff_zarr as nz
-import numpy as np
 from pathlib import Path
+import numpy as np
 import matplotlib.pyplot as plt
-from processing_tools import ArrayProcessor
+
+# Add the workshop directory to the Python path BEFORE importing from utils
+workshop_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(workshop_dir))
+
+from utils.ome_zarr_utils import convert_czi_to_hcs_zarr
+from utils.plotting_utils import create_well_plate_heatmap
+from utils.processing_tools import ArrayProcessor
 
 
 # Main execution
@@ -14,7 +20,7 @@ if __name__ == "__main__":
     show_napari = False  # Whether to display the result in napari viewer
 
     # Point to the main data folder (two directories up from demo/omezarr_testing)
-    filepath: str = str(Path(__file__).parent.parent.parent / "data" / "WP96_4Pos_B4-10_DAPI.czi")
+    filepath: str = str(Path(__file__).parent.parent.parent / "workshop" / "data" / "WP96_4Pos_B4-10_DAPI.czi")
 
     # Convert CZI file to HCS-ZARR format and get the output path
     zarr_output_path = convert_czi_to_hcs_zarr(filepath, overwrite=True)

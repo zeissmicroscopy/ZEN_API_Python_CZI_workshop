@@ -27,9 +27,8 @@ from skimage.color import label2rgb
 from skimage.util import invert
 import numpy as np
 
-# from zen_api_utils.misc import get_logger
-from misc import set_logging
-from onnx_inference import OnnxInferencer
+from .misc import set_logging
+from .onnx_inference import OnnxInferencer
 import pandas as pd
 import os
 from czitools.metadata_tools import czi_metadata as czimd
@@ -40,7 +39,6 @@ from shapely.geometry import Polygon
 
 # get the logger
 logger = set_logging()
-
 
 class ArrayProcessor:
     """
@@ -587,7 +585,7 @@ def segment_czi(
                     props["Well_ColId"] = mdata.sample.well_colID[s]
                     props["Well_RowId"] = mdata.sample.well_rowID[s]
                 except (IndexError, KeyError) as e:
-                    logger.warning(f"No Well Information found for Scene: {s}")
+                    logger.info(f"No Well Information found for Scene: {s}")
                     props["WellId"] = s
                     props["Well_ColId"] = s
                     props["Well_RowId"] = s
@@ -685,7 +683,7 @@ def segment_czi(
             bbox_height=results["bbox_height"],
         )
 
-    logger.info(f"Finished writing to Segmented CZI File: {savepath_seg}")
+    print(f"Finished writing to Segmented CZI File: {savepath_seg}")
 
     # write the CSV data table
     csvfile = misc.get_fname_woext(mdata.filename) + "_seg.csv"

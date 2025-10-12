@@ -1,11 +1,18 @@
-from ome_zarr_utils import convert_czi_to_hcsplate
-from plotting_utils import create_well_plate_heatmap
+import sys
 import ngff_zarr as nz
-from czitools.read_tools import read_tools
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
-from processing_tools import ArrayProcessor
+
+# Add the workshop directory to the Python path BEFORE importing from utils
+workshop_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(workshop_dir))
+
+# Now import from utils (after sys.path is modified)
+#
+from utils.ome_zarr_utils import convert_czi_to_hcsplate
+from utils.plotting_utils import create_well_plate_heatmap
+from utils.processing_tools import ArrayProcessor
 
 
 # Main execution
@@ -15,21 +22,14 @@ if __name__ == "__main__":
     validate = True
     show_napari = False
 
-    # # Point to the main data folder (two directories up from demo/omezarr_testing)
-    # czi_filepath: str = str(Path(__file__).parent.parent.parent / "data" / "WP96_4Pos_B4-10_DAPI.czi")
+    # Point to the main data folder (two directories up from demo/omezarr_testing)
+    czi_filepath: str = str(Path(__file__).parent.parent.parent / "workshop" / "data" / "WP96_4Pos_B4-10_DAPI.czi")
 
-    # # Read CZI file
-    # array6d, mdata = read_tools.read_6darray(czi_filepath, use_xarray=True)
-    # print(f"Array Type: {type(array6d)}, Shape: {array6d.shape}, Dtype: {array6d.dtype}")
+    zarr_output_path = convert_czi_to_hcsplate(czi_filepath, plate_name="Automated Plate", overwrite=overwrite)
 
-    # zarr_output_path = convert_czi_to_hcsplate(czi_filepath, plate_name="Automated Plate", overwrite=overwrite)
-
-    zarr_output_path = r"F:\Github\czitools\data\WP96_4Pos_B4-10_DAPI_ngff_plate.ome.zarr"
-
-    if validate:
-        print("Validating created HCS-ZARR file against schema...")
-        hcs_plate = nz.from_hcs_zarr(zarr_output_path, validate=True)
-        print("Validation successful.")
+    print("Validating created HCS-ZARR file against schema...")
+    hcs_plate = nz.from_hcs_zarr(zarr_output_path, validate=validate)
+    print("Validation successful.")
 
     # run some processing
     results_obj = {}
@@ -76,7 +76,7 @@ if __name__ == "__main__":
                 # Load the image data into memory (compute() for dask arrays)
                 data = image.images[0].data.compute()
                 print(
-                    f"Processing well: {well_meta.path} - Field {field_idx} data shape: {data.shape}, dtype: {data.dtype}"
+                    f"Analyzing well: {well_meta.path} - Field {field_idx} data shape: {data.shape}, dtype: {data.dtype}"
                 )
 
                 # count objects
