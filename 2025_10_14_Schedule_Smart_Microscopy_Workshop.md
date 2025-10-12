@@ -1,4 +1,6 @@
-﻿# Smart Microscopy On-site Workshop: From Zero to Hero with ZEN and Open-Source Tools
+﻿# Smart Microscopy On-site Workshop
+
+## From Zero to Hero with ZEN and Open-Source Tools
 
 | **Start** | **End** |                                                                                         **Tuesday 14th**                                                                                         |
 | :-------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
