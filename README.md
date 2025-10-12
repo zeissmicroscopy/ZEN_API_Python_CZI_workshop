@@ -11,12 +11,13 @@
     - [ZEN API Python Examples](#zen-api-python-examples)
       - [ShowCase: Pixel Stream and Online Processing](#showcase-pixel-stream-and-online-processing)
       - [ShowCase: Guided Acquisition](#showcase-guided-acquisition)
-  - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
+  - [Deep Learning Topics](#deep-learning-topics)
+    - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
     - [Use the model in your python code](#use-the-model-in-your-python-code)
-  - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
+    - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
     - [Train a simple model for semantic segmentation](#train-a-simple-model-for-semantic-segmentation)
     - [Train a simple model for regression](#train-a-simple-model-for-regression)
-  - [Use the model inside Napari (optional)](#use-the-model-inside-napari-optional)
+    - [Use the model inside Napari (experimental)](#use-the-model-inside-napari-experimental)
   - [Using the czitools package (experimental)](#using-the-czitools-package-experimental)
     - [Read CZI metadata](#read-czi-metadata)
     - [Read CZI pixeldata](#read-czi-pixeldata)
@@ -30,6 +31,12 @@
     - [Usage example with multiple files (bash)](#usage-example-with-multiple-files-bash)
   - [CZIShrink - Compress CZI image files from a cross-platform UI](#czishrink---compress-czi-image-files-from-a-cross-platform-ui)
   - [CZICheck - Check CZI for internal errors](#czicheck---check-czi-for-internal-errors)
+  - [napari-czitools (experimental)](#napari-czitools-experimental)
+  - [CZI and OME-ZARR (experimental)](#czi-and-ome-zarr-experimental)
+    - [Convert CZI to OME-ZARR using ome-zarr](#convert-czi-to-ome-zarr-using-ome-zarr)
+    - [Convert CZI to OME-ZARR using ngff-zarr](#convert-czi-to-ome-zarr-using-ngff-zarr)
+    - [Convert CZI to OME-ZARR HCS Plate using ome-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ome-zarr)
+    - [Convert CZI to OME-ZARR HCS Plate using ngff-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ngff-zarr)
   - [Links](#links)
 
 ## Disclaimer
@@ -93,8 +100,9 @@ ZEN running a simple "guided acquisition" where the overview image is analyzed u
 
 ![ZEN API Guided Acquisition](https://raw.githubusercontent.com/zeiss-microscopy/OAD/master/ZEN-API/images/zenapi_guidedacq.gif)
 
+## Deep Learning Topics
 
-## Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
+### Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
 
 The general idea is to learn how to label a dataset on [arivis Cloud].
 
@@ -120,7 +128,7 @@ Once the model is trained it can be downloaded directly to your hard disk and us
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
 
-## Train your own model and package (as *.czann) using the [czmodel] package
+### Train your own model and package (as *.czann) using the [czmodel] package
 
 The package provides simple-to-use conversion tools to generate a CZANN file from a [PyTorch] or [ONNX] model that resides in memory or on disk to be usable in the ZEN, arivis Cloud, arivisPro software platforms and also in your own code.
 
@@ -134,19 +142,25 @@ For details and more information examples please go to: [czmodel]
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/Regresssion_PyTorch.ipynb)
 
-## Use the model inside Napari (optional)
+### Use the model inside Napari (experimental)
 
-In order to use such a model one needs a running python environment with [Napari] and the napari-czann-segment plugin installed.
+This plugin is purely experimental. The authors undertakes no warranty concerning its use.
+
+In order to use such a model one needs a running python environment with [Napari] and the [napari-czann-segment] plugin installed.
 
 It can install it via [pip]:
 
-    pip install napari-czann-segment
+```cmd
+pip install napari-czann-segment
+```
 
 For more detailed information about the plugin please go to: [Napari Hub - napari-czann-segment](https://www.napari-hub.org/plugins/napari-czann-segment)
 
 ![Train on arivis Cloud and use model in Napari](https://github.com/sebi06/napari-czann-segment/raw/main/readme_images/Train_APEER_run_Napari_CZANN_no_highlights_small.gif)
 
 ## Using the [czitools] package (experimental)
+
+This python package is purely experimental. The authors undertakes no warranty concerning its use.
 
 For details please visit: [czitools]
 
@@ -237,7 +251,6 @@ Start the executable from the command line, providing the required command line 
     compressed with such a scheme will be copied verbatim to the destination file,
     regardless of the command and strategy chosen.
 
-
 ### Usage example for single files from commandline (cmd.exe)
 
 ```cmd
@@ -246,7 +259,6 @@ cd /D D:\TestData
 
 czicompress --command compress -i LLS-31Timepoints-2Channels.czi -o compressed.czi
 ```
-
 
 ### Usage example with multiple files (bash)
 
@@ -279,7 +291,7 @@ find -type f -name '*.czi' -not -iname '*zstd*' -exec czicompress.sh '{}' \;
 [CZICheck] is a command-line application developed using libCZI, enabling users to assess the integrity and structural correctness of a CZI document.
 
 Checking the validity of a CZI becomes more complex the closer one is to the application domain (e.g. application-specific metadata).
-So this console application is more of a utility to help users who are directly using libCZI, or its python wrapper [pylibCZIrw], than it is an official validation tool for any ZEISS-produced CZIs.
+So this console application is more of a utility to help users who are directly using [libCZI], or its python wrapper [pylibCZIrw] & [pylibCZIrw_github], than it is an official validation tool for any ZEISS-produced CZIs.
 
 CZICheck runs a collection of *checkers* which evaluate a well defined rule.
 Each *checker* reports back findings of type Fatal, Warn, or Info.
@@ -288,14 +300,49 @@ Please check the tool's internal help by running `CZICheck.exe --help` and check
 
 ![CZIChecker in Action](./images/czichecker1.png)
 
+## napari-czitools (experimental)
+
+This plugin is purely experimental. The authors undertakes no warranty concerning its use.
+
+In order to use such a model one needs a running python environment with [Napari] and the [napari-czitools] plugin installed.
+
+It can install it via [pip]:
+
+```cmd
+pip install napari-czitools
+```
+
+For more detailed information about the plugin please go to: [Napari Hub - napari-czitools](https://napari-hub.org/plugins/napari-czitools.html)
+
+## CZI and OME-ZARR (experimental)
+
+All OME-ZARR related scripts here are purely experimental. The authors undertakes no warranty concerning the use of those scripts.
+
+**By using any of those examples you agree to this disclaimer.**
+
+### Convert CZI to OME-ZARR using [ome-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_omezarr_adv.py)
+
+### Convert CZI to OME-ZARR using [ngff-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_omezarr_ngff.py)
+
+### Convert CZI to OME-ZARR HCS Plate using [ome-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_omezarr.py)
+
+### Convert CZI to OME-ZARR HCS Plate using [ngff-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
+
 ## Links
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
 [PyPi]: https://pypi.org/
-[libCZI Source]: https://github.com/ZEISS/libczi
 [pylibCZIrw]: https://pypi.org/project/pylibCZIrw
-[pylibCZIrw Source]: https://github.com/ZEISS/pylibczirw
+[pylibCZIrw_github]: https://github.com/ZEISS/pylibczirw
 [czmodel]: https://pypi.org/project/czmodel
 [cztile]: https://pypi.org/project/cztile
 [arivis Cloud]: https://www.arivis.cloud
@@ -310,3 +357,6 @@ Please check the tool's internal help by running `CZICheck.exe --help` and check
 [Docker Desktop]: https://www.docker.com/products/docker-desktop
 [CZICompress]: https://github.com/ZEISS/czicompress
 [CZIChecker]: https://github.com/ZEISS/czicheck
+[ome-zarr]: https://github.com/ome/ome-zarr-py
+[NGFF]: https://ngff.openmicroscopy.org/
+[ngff-zarr]: https://github.com/fideus-labs/ngff-zarr
