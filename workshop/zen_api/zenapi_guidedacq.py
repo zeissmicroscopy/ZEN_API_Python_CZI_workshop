@@ -17,10 +17,10 @@ import numpy as np
 from pathlib import Path
 from zen_api_utils.misc import initialize_zenapi, set_logging
 from zen_api_utils.tiles_positions import TileRegionRectangle, TileRegionPolygon, TileRegionEllipse
-import zen_tcpip_commands
-from zen_tcpip import ZenCommands
+import zen_api_utils.zen_tcpip_commands as zen_tcpip_commands
+from zen_api_utils.zen_tcpip import ZenCommands
 from processing_tools import segment_czi
-from czitools.utils import misc, planetable
+from czitools.utils import planetable
 from tqdm import trange
 from datetime import datetime
 import shutil

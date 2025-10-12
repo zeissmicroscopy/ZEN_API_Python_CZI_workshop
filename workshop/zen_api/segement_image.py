@@ -6,14 +6,10 @@ from zen_api_utils.misc import set_logging
 
 logger = set_logging()
 
-filepath_overview = r"data\OverViewScan.czi"
+filepath_overview = r"F:\Github\ZEN_Python_CZI_Smart_Microscopy_Workshop\workshop\data\OverViewScan.czi"
 open_czi = True
 
 logger.info(f"Segment File: {filepath_overview}")
-logger.error(f"Segment File: {filepath_overview}")
-logger.debug(f"Segment File: {filepath_overview}")
-logger.critical(f"Segment File: {filepath_overview}")
-logger.warning(f"Segment File: {filepath_overview}")
 
 savename_seg, results, csvfile, objects = segment_czi(
     filepath_overview,
