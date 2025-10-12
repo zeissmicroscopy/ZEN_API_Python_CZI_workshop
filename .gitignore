@@ -181,3 +181,4 @@ cython_debug/
 /workshop/data/WP96_4Pos_B4-10_DAPI.ome.zarr/**
 /workshop/zen_api/OverViewScan_seg_planetable.csv
 /workshop/zen_api/OverViewScan_seg.czi
+/archive
