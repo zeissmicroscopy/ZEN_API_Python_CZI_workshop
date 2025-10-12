@@ -87,7 +87,6 @@ conda env create --file zen_smartmic.yml
 
 All examples can be found at: **[ZEN API Examples - ZEN Blue 3.12](https://github.com/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/tree/main/workshop/zen_api)**
 
-
 #### ShowCase: Pixel Stream and Online Processing
 
 ZEN running an acquisition while the PixelStream is processed by a python client. For the code can be found at: [zenapi_streaming.py](./python_examples/zenapi_streaming.py)
@@ -206,50 +205,52 @@ Therefore we created a command line tool:
 
 Start the executable from the command line, providing the required command line arguments.
 
-    Usage: czicompress [OPTIONS]
+```cmd
+Usage: czicompress [OPTIONS]
 
-    Options:
-    -h,--help         Print this help message and exit
+Options:
+-h,--help         Print this help message and exit
 
-    -c,--command COMMAND
-                        Specifies the mode of operation: 'compress' to convert to a
-                        zstd-compressed CZI, 'decompress' to convert to a CZI
-                        containing only uncompressed data.
+-c,--command COMMAND
+                    Specifies the mode of operation: 'compress' to convert to a
+                    zstd-compressed CZI, 'decompress' to convert to a CZI
+                    containing only uncompressed data.
 
-    -i,--input SOURCE_FILE
-                        The source CZI-file to be processed.
+-i,--input SOURCE_FILE
+                    The source CZI-file to be processed.
 
-    -o,--output DESTINATION_FILE
-                        The destination CZI-file to be written.
+-o,--output DESTINATION_FILE
+                    The destination CZI-file to be written.
 
-    -s,--strategy STRATEGY
-                        Choose which subblocks of the source file are compressed.
-                        STRATEGY can be one of 'all', 'uncompressed',
-                        'uncompressed_and_zstd'. The default is 'uncompressed'.
+-s,--strategy STRATEGY
+                    Choose which subblocks of the source file are compressed.
+                    STRATEGY can be one of 'all', 'uncompressed',
+                    'uncompressed_and_zstd'. The default is 'uncompressed'.
 
-    -t,--compression_options COMPRESSION_OPTIONS
-                        Specify compression parameters. The default is
-                        'zstd1:ExplicitLevel=0;PreProcess=HiLoByteUnpack'.
+-t,--compression_options COMPRESSION_OPTIONS
+                    Specify compression parameters. The default is
+                    'zstd1:ExplicitLevel=0;PreProcess=HiLoByteUnpack'.
 
 
-    Copies the content of a CZI-file into another CZI-file changing the compression
-    of the image data.
-    With the 'compress' command, uncompressed image data is converted to
-    Zstd-compressed image data. This can reduce the file size substantially. With
-    the 'decompress' command, compressed image data is converted to uncompressed
-    data.
-    For the 'compress' command, a compression strategy can be specified with the
-    '--strategy' option. It controls which subblocks of the source file will be
-    compressed. The source document may already contain compressed data (possibly
-    with a lossy compression scheme). In this case it is undesirable to compress the
-    data with lossless zstd, as that will almost certainly increase the file size.
-    Therefore, the "uncompressed" strategy compresses only uncompressed subblocks.
-    The "uncompressed_and_zstd" strategy compresses the subblocks that are
-    uncompressed OR compressed with Zstd, and the "all" strategy compresses all
-    subblocks, regardless of their current compression status. Some compression
-    schemes that can occur in a CZI-file cannot be decompressed by this tool. Data
-    compressed with such a scheme will be copied verbatim to the destination file,
-    regardless of the command and strategy chosen.
+Copies the content of a CZI-file into another CZI-file changing the compression
+of the image data.
+With the 'compress' command, uncompressed image data is converted to
+Zstd-compressed image data. This can reduce the file size substantially. With
+the 'decompress' command, compressed image data is converted to uncompressed
+data.
+For the 'compress' command, a compression strategy can be specified with the
+'--strategy' option. It controls which subblocks of the source file will be
+compressed. The source document may already contain compressed data (possibly
+with a lossy compression scheme). In this case it is undesirable to compress the
+data with lossless zstd, as that will almost certainly increase the file size.
+Therefore, the "uncompressed" strategy compresses only uncompressed subblocks.
+The "uncompressed_and_zstd" strategy compresses the subblocks that are
+uncompressed OR compressed with Zstd, and the "all" strategy compresses all
+subblocks, regardless of their current compression status. Some compression
+schemes that can occur in a CZI-file cannot be decompressed by this tool. Data
+compressed with such a scheme will be copied verbatim to the destination file,
+regardless of the command and strategy chosen.
+```
 
 ### Usage example for single files from commandline (cmd.exe)
 
@@ -358,15 +359,12 @@ See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
-[PyPi]: https://pypi.org/
 [pylibCZIrw]: https://pypi.org/project/pylibCZIrw
 [pylibCZIrw_github]: https://github.com/ZEISS/pylibczirw
 [czmodel]: https://pypi.org/project/czmodel
-[cztile]: https://pypi.org/project/cztile
 [arivis Cloud]: https://www.arivis.cloud
 [napari-czann-segment]: https://github.com/sebi06/napari_czann_segment
 [napari-czitools]: https://github.com/sebi06/napari-czitools
-[CZI]: https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html
 [PyTorch]: https://pytorch.org
 [ONNX]: https://onnx.ai
 [libCZI]: https://github.com/ZEISS/libczi
@@ -374,7 +372,5 @@ See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
 [Colab]: https://colab.research.google.com
 [Docker Desktop]: https://www.docker.com/products/docker-desktop
 [CZICompress]: https://github.com/ZEISS/czicompress
-[CZIChecker]: https://github.com/ZEISS/czicheck
 [ome-zarr]: https://github.com/ome/ome-zarr-py
-[NGFF]: https://ngff.openmicroscopy.org/
 [ngff-zarr]: https://github.com/fideus-labs/ngff-zarr
