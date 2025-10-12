@@ -1,4 +1,6 @@
-﻿| **Start** | **End** |                                                                                         **Tuesday 14th**                                                                                         |
+﻿# Smart Microscopy On-site Workshop: From Zero to Hero with ZEN and Open-Source Tools
+
+| **Start** | **End** |                                                                                         **Tuesday 14th**                                                                                         |
 | :-------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |   09:00   |  09:15  |                                                                                         **Introduction**                                                                                         |
 |   09:15   |  10:15  |                                  Image Analysis in ZEN & arivis Cloud<br>BioApps - Preconfigured Assays in ZEN<br>AI Tools in ZEN & arivis Cloud<br>ZEN Copilot                                  |
@@ -10,6 +12,8 @@
 |   14:30   |  15:30  |                                                                             ZEN API - Control ZEN "from the outside"                                                                             |
 |   15:30   |  16:00  |                                                                                         **Coffee Break**                                                                                         |
 |   16:00   |  16:45  |                                                                                      Smart Microscopy Talk                                                                                       |
+
+---
 
 | **Start** | **End** |                                                         **Wednesday 15th**                                                         |
 | :-------: | :-----: | :--------------------------------------------------------------------------------------------------------------------------------: |
@@ -24,7 +28,7 @@
 |   15:30   |  16:00  |                                                          **Coffee Break**                                                          |
 |   16:00   |  16:45  |                                                Setup Python Environment for ZEN API                                                |
 
-
+---
 
 | **Start** | **End** |                                  **Thursday 15th**                                  |
 | :-------: | :-----: | :---------------------------------------------------------------------------------: |

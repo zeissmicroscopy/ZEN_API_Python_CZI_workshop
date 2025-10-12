@@ -5,6 +5,12 @@
   - [General Remarks](#general-remarks)
   - [Prerequisites](#prerequisites)
     - [Install python base  environment (miniconda etc.)](#install-python-base--environment-miniconda-etc)
+  - [ZEN API](#zen-api)
+    - [ZEN API - General Information](#zen-api---general-information)
+    - [ZEN API - ZEN Blu 3.12 - Documentation](#zen-api---zen-blu-312---documentation)
+    - [ZEN API Python Examples](#zen-api-python-examples)
+      - [ShowCase: Pixel Stream and Online Processing](#showcase-pixel-stream-and-online-processing)
+      - [ShowCase: Guided Acquisition](#showcase-guided-acquisition)
   - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
     - [Use the model in your python code](#use-the-model-in-your-python-code)
   - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
@@ -59,6 +65,34 @@ conda env create --file zen_smartmic.yml
 > To use [Colab] one needs to have a Google account.
 >
 > To test and run an [arivis Cloud] module locally one needs [Docker Desktop] installed.
+
+## ZEN API
+
+### ZEN API - General Information
+
+- See: **[ZEN API -General Information](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/README.md)**
+
+### ZEN API - ZEN Blu 3.12 - Documentation
+
+- See: **[ZEN API Documentation](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/documentation/ZEN_API_Documentation_20250509.md)**
+
+### ZEN API Python Examples
+
+All examples can be found at: **[ZEN API Examples - ZEN Blue 3.12](https://github.com/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/tree/main/workshop/zen_api)**
+
+
+#### ShowCase: Pixel Stream and Online Processing
+
+ZEN running an acquisition while the PixelStream is processed by a python client. For the code can be found at: [zenapi_streaming.py](./python_examples/zenapi_streaming.py)
+
+![ZEN API - Online Processing](https://raw.githubusercontent.com/zeiss-microscopy/OAD/master/ZEN-API/images/zenapi_online_process.gif)
+
+#### ShowCase: Guided Acquisition
+
+ZEN running a simple "guided acquisition" where the overview image is analyzed using python. Subsequently all found objects are acquire automatically. For the code can be found at: [zenapi_guidedacq.py](./python_examples/zenapi_guidedacq.py)
+
+![ZEN API Guided Acquisition](https://raw.githubusercontent.com/zeiss-microscopy/OAD/master/ZEN-API/images/zenapi_guidedacq.gif)
+
 
 ## Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
 
