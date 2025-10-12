@@ -37,7 +37,7 @@
     - [Convert CZI to OME-ZARR using ngff-zarr](#convert-czi-to-ome-zarr-using-ngff-zarr)
     - [Convert CZI to OME-ZARR HCS Plate using ome-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ome-zarr)
     - [Convert CZI to OME-ZARR HCS Plate using ngff-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ngff-zarr)
-  - [Links](#links)
+  - [USeful Links](#useful-links)
 
 ## Disclaimer
 
@@ -336,7 +336,32 @@ See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_omezarr.py)
 
 See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
 
-## Links
+## USeful Links
+
+- [Napari](https://github.com/napari/napari)
+- [pip](https://pypi.org/project/pip/)
+- [PyPi](https://pypi.org/)
+- [pylibCZIrw](https://pypi.org/project/pylibCZIrw)
+- [pylibCZIrw GitHub](https://github.com/ZEISS/pylibczirw)
+- [czmodel](https://pypi.org/project/czmodel)
+- [cztile](https://pypi.org/project/cztile)
+- [arivis Cloud](https://www.arivis.cloud)
+- [napari-czann-segment](https://github.com/sebi06/napari_czann_segment)
+- [napari-czitools](https://github.com/sebi06/napari-czitools)
+- [CZI](https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html)
+- [PyTorch](https://pytorch.org)
+- [ONNX](https://onnx.ai)
+- [libCZI](https://github.com/ZEISS/libczi)
+- [czitools](https://pypi.org/project/czitools)
+- [Colab](https://colab.research.google.com)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [CZICompress](https://github.com/ZEISS/czicompress)
+- [CZIChecker](https://github.com/ZEISS/czicheck)
+- [ome-zarr](https://github.com/ome/ome-zarr-py)
+- [NGFF](https://ngff.openmicroscopy.org/)
+- [ngff-zarr](https://github.com/fideus-labs/ngff-zarr)
+
+---
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
