@@ -64,7 +64,7 @@ conda install jupyterlab jupyter_server nb_conda_kernels
 To run the notebooks locally it is recommended to create a fresh conda environment. Please feel free to use the provided [YML file](workshop/env_smartmic.yml) (at your own risk) to create such an environment:
 
 ```cmd
-conda env create --file zen_smartmic.yml
+conda env create --file env_smartmic.yml
 ```
 
 > Important: If one wants to test the labeling & training directly on [arivis Cloud] or create a module it is required to have an account.
