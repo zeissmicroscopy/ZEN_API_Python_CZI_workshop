@@ -44,5 +44,3 @@
 |   14:15   |  15:00  |           Showcase: Convert CZI to OME-ZARR and run some processing on it           |
 |   15:00   |  15:15  |                                  **Coffee Break**                                   |
 |   15:15   |  16:00  |                Advanced CZI-related examples<br>Extract CZI Metadata                |
-
-
