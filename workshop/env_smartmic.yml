@@ -86,6 +86,7 @@ dependencies:
       - napari-plugin-search
       - napari-simpleitk-image-processing
       - napari-skimage-regionprops
+      - napari-orthogonal-views
       - ngff-zarr
       - ngff-zarr[dask-image]
       - ngff-zarr[validate]
