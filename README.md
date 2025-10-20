@@ -1,14 +1,23 @@
-- [Disclaimer](#disclaimer)
-- [General Remarks](#general-remarks)
-- [Prerequisites](#prerequisites)
-- [Content](#content)
-  - [Read, process and write CZIs using pylibCZIrw](#read-process-and-write-czis-using-pylibczirw)
-  - [Train a Deep-Learning Model on arivis Cloud](#train-a-deep-learning-model-on-arivis-cloud)
+# Smart Microscopy On-site Workshop: From Zero to Hero with ZEN and Open-Source Tools
+
+- [Smart Microscopy On-site Workshop: From Zero to Hero with ZEN and Open-Source Tools](#smart-microscopy-on-site-workshop-from-zero-to-hero-with-zen-and-open-source-tools)
+  - [Disclaimer](#disclaimer)
+  - [General Remarks](#general-remarks)
+  - [Prerequisites](#prerequisites)
+    - [Install python base  environment (miniconda etc.)](#install-python-base--environment-miniconda-etc)
+  - [ZEN API](#zen-api)
+    - [ZEN API - General Information](#zen-api---general-information)
+    - [ZEN API - ZEN Blue 3.12 - Documentation](#zen-api---zen-blue-312---documentation)
+    - [ZEN API Python Examples](#zen-api-python-examples)
+      - [ShowCase: Pixel Stream and Online Processing](#showcase-pixel-stream-and-online-processing)
+      - [ShowCase: Guided Acquisition](#showcase-guided-acquisition)
+  - [Deep Learning Topics](#deep-learning-topics)
+    - [Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud](#train-a-deep-learning-model-for-semantic-segmentation-on-arivis-cloud)
     - [Use the model in your python code](#use-the-model-in-your-python-code)
-  - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
+    - [Train your own model and package (as \*.czann) using the czmodel package](#train-your-own-model-and-package-as-czann-using-the-czmodel-package)
     - [Train a simple model for semantic segmentation](#train-a-simple-model-for-semantic-segmentation)
     - [Train a simple model for regression](#train-a-simple-model-for-regression)
-  - [Use the model inside Napari (optional)](#use-the-model-inside-napari-optional)
+    - [Use the model inside Napari (experimental)](#use-the-model-inside-napari-experimental)
   - [Using the czitools package (experimental)](#using-the-czitools-package-experimental)
     - [Read CZI metadata](#read-czi-metadata)
     - [Read CZI pixeldata](#read-czi-pixeldata)
@@ -22,68 +31,81 @@
     - [Usage example with multiple files (bash)](#usage-example-with-multiple-files-bash)
   - [CZIShrink - Compress CZI image files from a cross-platform UI](#czishrink---compress-czi-image-files-from-a-cross-platform-ui)
   - [CZICheck - Check CZI for internal errors](#czicheck---check-czi-for-internal-errors)
-  - [Control ZEN via TCP-IP (from Napari)](#control-zen-via-tcp-ip-from-napari)
-  - [Create a simple arivis Cloud Module](#create-a-simple-arivis-cloud-module)
+  - [napari-czitools (experimental)](#napari-czitools-experimental)
+  - [CZI and OME-ZARR (experimental)](#czi-and-ome-zarr-experimental)
+    - [Convert CZI to OME-ZARR using ome-zarr](#convert-czi-to-ome-zarr-using-ome-zarr)
+    - [Convert CZI to OME-ZARR using ngff-zarr](#convert-czi-to-ome-zarr-using-ngff-zarr)
+    - [Convert CZI to OME-ZARR HCS Plate using ome-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ome-zarr)
+    - [Convert CZI to OME-ZARR HCS Plate using ngff-zarr](#convert-czi-to-ome-zarr-hcs-plate-using-ngff-zarr)
+  - [Useful Links](#useful-links)
 
-# Disclaimer
+## Disclaimer
 
-This content of this repository is free to use for everybody and purely experimental. Carl Zeiss Microscopy GmbH's ZEN software undertakes no warranty concerning the use of those scripts, image analysis settings and ZEN experiments, especially not for the examples using 3rd python modules. Use them on your own risk.
+This content of this repository is free to use for everybody and purely experimental. The authors undertakes no warranty concerning the use of those scripts, image analysis settings and ZEN experiments, especially not for the examples using 3rd python modules. Use them on your own risk.
 
 **By using any of those examples you agree to this disclaimer.**
 
-Version: 2023.10.19
-
-Copyright (c) 2023 Carl Zeiss AG, Germany. All Rights Reserved.
-
-# General Remarks
+## General Remarks
 
 This repository contains scripts and notebooks showcasing several tools and scripts centered around ZEN, CZI image files, deep-learning models and related python packages.
 
-***
+## Prerequisites
 
-# Prerequisites
+### Install python base  environment (miniconda etc.)
 
-To run the notebooks locally it is recommended to create a fresh conda environment. Please feel free to use the provided [YML file](workshop/zen_python.yml) (at your own risk) to create such an environment:
+- Download and install Miniconda if needed: [Download Miniconda](https://www.anaconda.com/download/success)
+- Install Jupyter & Co
 
-    conda env create --file zen_python.yml
+```cmd
+conda activate base
+conda install jupyterlab jupyter_server nb_conda_kernels
+```
+
+To run the notebooks locally it is recommended to create a fresh conda environment. Please feel free to use the provided [YML file](workshop/env_smartmic.yml) (at your own risk) to create such an environment:
+
+```cmd
+conda env create --file env_smartmic.yml
+```
 
 > Important: If one wants to test the labeling & training directly on [arivis Cloud] or create a module it is required to have an account.
-> 
+>
 > To use [Colab] one needs to have a Google account.
 >
-> To test and run an [arivis Cloud] module locally one needs [Docker Desktop] or an equivalent runtime installed
+> To test and run an [arivis Cloud] module locally one needs [Docker Desktop] installed.
 
-# Content
+## ZEN API
 
-The workshop is focusing on various tools and python packages published by ZEISS for reading CZI images, exchanging Deep-Learning models and general image processing tasks. The following topics will be covered:
+### ZEN API - General Information
 
-- Read, process and write CZIs using [pylibCZIrw] and [cztile]
-- Train your own model and package it a using the [czmodel] package
-- Train a Deep-Learning Model on the  [arivis Cloud] platform
-- Use the model in your python code
-- Use the model inside [Napari]
-- Using [czitools] package
-- [CZICompress], [CZIShrink] and [CZIChecker] - tools built around the CZI image format and its APIs
-- Control ZEN via TCP-IP from [Napari]
-- Create a simple [arivis Cloud] module to use your own code in ZEN
+- See: **[ZEN API -General Information](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/README.md)**
 
-## Read, process and write CZIs using pylibCZIrw
+### ZEN API - ZEN Blue 3.12 - Documentation
 
-This package provides a simple and easy-to-use Python wrapper for [libCZI] - a cross-platform C++ library to read and write multi-dimensional CZI image documents.
+- See: **[ZEN API Documentation](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/documentation/ZEN_API_Documentation_20250509.md)**
 
-- The core concept of pylibCZIrw is focussing on reading and writing 2D image planes by specifying the dimension indices and its location in order to only read or write **what is really needed**.
+### ZEN API Python Examples
 
-The basic usage can be inferred from this sample notebook:&nbsp;
+All examples can be found at: **[ZEN API Examples - ZEN Blue 3.12](https://github.com/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/tree/main/workshop/zen_api)**
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zeissmicroscopy/ZEN_Python_OAD_workshop/blob/main/workshop/notebooks/using_pylibCZIrw.ipynb)
+#### ShowCase: Pixel Stream and Online Processing
 
-For more detailed information refer to the pylibCZIrw-documentation.html shipped with the source distribution of this package.
+ZEN running an acquisition while the PixelStream is processed by a python client. For the code can be found at: [zenapi_streaming.py](./python_examples/zenapi_streaming.py)
 
-## Train a Deep-Learning Model on arivis Cloud
+![ZEN API - Online Processing](https://raw.githubusercontent.com/zeiss-microscopy/OAD/master/ZEN-API/images/zenapi_online_process.gif)
+
+#### ShowCase: Guided Acquisition
+
+ZEN running a simple "guided acquisition" where the overview image is analyzed using python. Subsequently all found objects are acquire automatically. For the code can be found at: [zenapi_guidedacq.py](./python_examples/zenapi_guidedacq.py)
+
+![ZEN API Guided Acquisition](https://raw.githubusercontent.com/zeiss-microscopy/OAD/master/ZEN-API/images/zenapi_guidedacq.gif)
+
+## Deep Learning Topics
+
+### Train a Deep-Learning Model for Semantic Segmentation on arivis Cloud
 
 The general idea is to learn how to label a dataset on [arivis Cloud].
 
-Dataset Name: **cyto2022_nuclei**
+Dataset Name: **Smart_Microscopy_Workshop_2025_Nucleus_Semantic**
 
 ![Annotated Dataset](./images/apeer_dataset_nuc.png)
 
@@ -95,7 +117,7 @@ Dataset Name: **cyto2022_nuclei**
 
 - start a training to get a trained model as a *.czann file
 
-Remark: The the modelfile: **cyto2022_nuc.czann** can be found inside the repository.
+Remark: The the modelfile: **cyto2022_nuc2.czann** can be found inside the repository.
 
 For more detailed information please visit: [Docs - Partial Annotations](https://docs.apeer.com/machine-learning/annotation-guidelines)
 
@@ -103,39 +125,41 @@ For more detailed information please visit: [Docs - Partial Annotations](https:/
 
 Once the model is trained it can be downloaded directly to your hard disk and used to segment images in ZEN or arivis Pro or your own python code.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zeissmicroscopy/ZEN_Python_OAD_workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/run_prediction_from_czann.ipynb)
 
-## Train your own model and package (as *.czann) using the [czmodel] package
+### Train your own model and package (as *.czann) using the [czmodel] package
 
-The package provides simple-to-use conversion tools to generate a CZANN file from a [PyTorch], [TensorFlow] or [ONNX] model that resides in memory or on disk to be usable in the ZEN, arivis Cloud, arivisPro software platforms and also in your own code.
+The package provides simple-to-use conversion tools to generate a CZANN file from a [PyTorch] or [ONNX] model that resides in memory or on disk to be usable in the ZEN, arivis Cloud, arivisPro software platforms and also in your own code.
 
 For details and more information examples please go to: [czmodel]
 
 ### Train a simple model for semantic segmentation
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zeissmicroscopy/ZEN_Python_OAD_workshop/blob/main/workshop/notebooks/SingleClassSemanticSegmentation_PyTorch.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/SingleClassSemanticSegmentation_PyTorch.ipynb)
 
 ### Train a simple model for regression
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zeissmicroscopy/ZEN_Python_OAD_workshop/blob/main/workshop/notebooks/Regresssion_PyTorch.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/ZEN_Python_CZI_Smart_Microscopy_Workshop/blob/main/workshop/notebooks/Regresssion_PyTorch.ipynb)
 
-***
+### Use the model inside Napari (experimental)
 
-## Use the model inside Napari (optional)
+This plugin is purely experimental. The authors undertakes no warranty concerning its use.
 
-In order to use such a model one needs a running python environment with [Napari] and the napari-czann-segment plugin installed.
+In order to use such a model one needs a running python environment with [Napari] and the [napari-czann-segment] plugin installed.
 
 It can install it via [pip]:
 
-    pip install napari-czann-segment
+```cmd
+pip install napari-czann-segment
+```
 
 For more detailed information about the plugin please go to: [Napari Hub - napari-czann-segment](https://www.napari-hub.org/plugins/napari-czann-segment)
 
 ![Train on arivis Cloud and use model in Napari](https://github.com/sebi06/napari-czann-segment/raw/main/readme_images/Train_APEER_run_Napari_CZANN_no_highlights_small.gif)
 
-***
-
 ## Using the [czitools] package (experimental)
+
+This python package is purely experimental. The authors undertakes no warranty concerning its use.
 
 For details please visit: [czitools]
 
@@ -145,7 +169,7 @@ For details please visit: [czitools]
 
 ### Read CZI pixeldata
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/czitools/blob/main/demo/notebooks/read_czi_pixeldata.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sebi06/czitools/blob/main/demo/notebooks/read_czi_pixeldata_simple.ipynb)
 
 ### Write OME-ZARR from 5D CZI image data
 
@@ -181,66 +205,70 @@ Therefore we created a command line tool:
 
 Start the executable from the command line, providing the required command line arguments.
 
-    Usage: czicompress [OPTIONS]
+```cmd
+Usage: czicompress [OPTIONS]
 
-    Options:
-    -h,--help         Print this help message and exit
+Options:
+-h,--help         Print this help message and exit
 
-    -c,--command COMMAND
-                        Specifies the mode of operation: 'compress' to convert to a
-                        zstd-compressed CZI, 'decompress' to convert to a CZI
-                        containing only uncompressed data.
+-c,--command COMMAND
+                    Specifies the mode of operation: 'compress' to convert to a
+                    zstd-compressed CZI, 'decompress' to convert to a CZI
+                    containing only uncompressed data.
 
-    -i,--input SOURCE_FILE
-                        The source CZI-file to be processed.
+-i,--input SOURCE_FILE
+                    The source CZI-file to be processed.
 
-    -o,--output DESTINATION_FILE
-                        The destination CZI-file to be written.
+-o,--output DESTINATION_FILE
+                    The destination CZI-file to be written.
 
-    -s,--strategy STRATEGY
-                        Choose which subblocks of the source file are compressed.
-                        STRATEGY can be one of 'all', 'uncompressed',
-                        'uncompressed_and_zstd'. The default is 'uncompressed'.
+-s,--strategy STRATEGY
+                    Choose which subblocks of the source file are compressed.
+                    STRATEGY can be one of 'all', 'uncompressed',
+                    'uncompressed_and_zstd'. The default is 'uncompressed'.
 
-    -t,--compression_options COMPRESSION_OPTIONS
-                        Specify compression parameters. The default is
-                        'zstd1:ExplicitLevel=0;PreProcess=HiLoByteUnpack'.
+-t,--compression_options COMPRESSION_OPTIONS
+                    Specify compression parameters. The default is
+                    'zstd1:ExplicitLevel=0;PreProcess=HiLoByteUnpack'.
 
 
-    Copies the content of a CZI-file into another CZI-file changing the compression
-    of the image data.
-    With the 'compress' command, uncompressed image data is converted to
-    Zstd-compressed image data. This can reduce the file size substantially. With
-    the 'decompress' command, compressed image data is converted to uncompressed
-    data.
-    For the 'compress' command, a compression strategy can be specified with the
-    '--strategy' option. It controls which subblocks of the source file will be
-    compressed. The source document may already contain compressed data (possibly
-    with a lossy compression scheme). In this case it is undesirable to compress the
-    data with lossless zstd, as that will almost certainly increase the file size.
-    Therefore, the "uncompressed" strategy compresses only uncompressed subblocks.
-    The "uncompressed_and_zstd" strategy compresses the subblocks that are
-    uncompressed OR compressed with Zstd, and the "all" strategy compresses all
-    subblocks, regardless of their current compression status. Some compression
-    schemes that can occur in a CZI-file cannot be decompressed by this tool. Data
-    compressed with such a scheme will be copied verbatim to the destination file,
-    regardless of the command and strategy chosen.
-
+Copies the content of a CZI-file into another CZI-file changing the compression
+of the image data.
+With the 'compress' command, uncompressed image data is converted to
+Zstd-compressed image data. This can reduce the file size substantially. With
+the 'decompress' command, compressed image data is converted to uncompressed
+data.
+For the 'compress' command, a compression strategy can be specified with the
+'--strategy' option. It controls which subblocks of the source file will be
+compressed. The source document may already contain compressed data (possibly
+with a lossy compression scheme). In this case it is undesirable to compress the
+data with lossless zstd, as that will almost certainly increase the file size.
+Therefore, the "uncompressed" strategy compresses only uncompressed subblocks.
+The "uncompressed_and_zstd" strategy compresses the subblocks that are
+uncompressed OR compressed with Zstd, and the "all" strategy compresses all
+subblocks, regardless of their current compression status. Some compression
+schemes that can occur in a CZI-file cannot be decompressed by this tool. Data
+compressed with such a scheme will be copied verbatim to the destination file,
+regardless of the command and strategy chosen.
+```
 
 ### Usage example for single files from commandline (cmd.exe)
 
-    SET PATH=$PATH;C:\Users\y1mrn\Downloads\czicompress
-    cd /D D:\TestData
+```cmd
+SET PATH=$PATH;C:\Users\y1mrn\Downloads\czicompress
+cd /D D:\TestData
 
-    czicompress --command compress -i LLS-31Timepoints-2Channels.czi -o compressed.czi
-
+czicompress --command compress -i LLS-31Timepoints-2Channels.czi -o compressed.czi
+```
 
 ### Usage example with multiple files (bash)
 
-    export PATH=$PATH:/c/Users/y1mrn/Downloads/czicompress
-    cd /d/TestData
+```cmd
+export PATH=$PATH:/c/Users/y1mrn/Downloads/czicompress
+cd /d/TestData
 
-    find -type f -name '*.czi' -not -iname '*zstd*' -exec czicompress.sh '{}' \;
+find -type f -name '*.czi' -not -iname '*zstd*' -exec czicompress.sh '{}' \;
+```
 
 ![CZICompress in Action in Ubuntu](./images/czicompress_linux_bash.gif)
 
@@ -261,10 +289,10 @@ Start the executable from the command line, providing the required command line 
 
 ## CZICheck - Check CZI for internal errors
 
-CZICheck is a command-line application developed using libCZI, enabling users to assess the integrity and structural correctness of a CZI document.
+[CZICheck] is a command-line application developed using libCZI, enabling users to assess the integrity and structural correctness of a CZI document.
 
 Checking the validity of a CZI becomes more complex the closer one is to the application domain (e.g. application-specific metadata).
-So this console application is more of a utility to help users who are directly using libCZI, or its python wrapper [pylibCZIrw], than it is an official validation tool for any ZEISS-produced CZIs.
+So this console application is more of a utility to help users who are directly using [libCZI], or its python wrapper [pylibCZIrw] & [pylibCZIrw_github], than it is an official validation tool for any ZEISS-produced CZIs.
 
 CZICheck runs a collection of *checkers* which evaluate a well defined rule.
 Each *checker* reports back findings of type Fatal, Warn, or Info.
@@ -273,47 +301,76 @@ Please check the tool's internal help by running `CZICheck.exe --help` and check
 
 ![CZIChecker in Action](./images/czichecker1.png)
 
-## Control ZEN via TCP-IP (from Napari)
+## napari-czitools (experimental)
 
-For details please check: [ZEN - TCP-IP Interface](https://github.com/zeiss-microscopy/OAD/tree/master/Interfaces/TCP-IP_interface)
+This plugin is purely experimental. The authors undertakes no warranty concerning its use.
 
-THis repo contains an example on how to control ZEN from Napari. It allows to start an experiment and remotely and open the CZI inside the Napari viewer
+In order to use such a model one needs a running python environment with [Napari] and the [napari-czitools] plugin installed.
 
-Please check the respective code: [napari_zen_connect.py](./workshop/napari_zen_connect/napari_zen_connect.py)
+It can install it via [pip]:
 
-> Important: This requires that one has a real or simulated microscope controlled by ZEN that can actually execute the experiment.
+```cmd
+pip install napari-czitools
+```
 
-## Create a simple arivis Cloud Module
+For more detailed information about the plugin please go to: [Napari Hub - napari-czitools](https://napari-hub.org/plugins/napari-czitools.html)
 
-The [arivis Cloud] platform does not allow to train deep learning models but also has tools to create so-called arivis Cloud modules and even workflows built upon a container infrastructure.
+## CZI and OME-ZARR (experimental)
 
-![arivis Cloud Architecture](./images/apeer_architecture2.png)
+All OME-ZARR related scripts here are purely experimental. The authors undertakes no warranty concerning the use of those scripts.
 
-In short - arivis Cloud modules are Docker containers with a UI specification that allows using them in the cloud and inside the ZEN software platform. For details please visit: [arivis Cloud - Architecture and Modules](https://docs.apeer.com/create-modules/the-apeer-architecture)
+**By using any of those examples you agree to this disclaimer.**
 
-![Module - UI Creation](./images/apeer_module_ui2.png)
+### Convert CZI to OME-ZARR using [ome-zarr]
 
-A simple example module based on python can be found here: [arivis Cloud - Simple Python Module](./workshop/apeer_module_example/README.md)
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_omezarr_adv.py)
 
-Please follow the instruction on how to create an [arivis Cloud] module using the built-in documentation and copy this code into your own module repository.
+### Convert CZI to OME-ZARR using [ngff-zarr]
 
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_omezarr_ngff.py)
 
+### Convert CZI to OME-ZARR HCS Plate using [ome-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_omezarr.py)
+
+### Convert CZI to OME-ZARR HCS Plate using [ngff-zarr]
+
+See: [write_omezarr_adv.py](./workshop/czi_omezarr/write_hcs_ngffzarr.py)
+
+## Useful Links
+
+---
+
+| Name/Description                                      | Link                                                                                    | Name/Description                                      | Link                                                |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| Napari - Python-based image viewer                    | [GitHub](https://github.com/napari/napari)                                              | pip - Python Package Installer                        | [PyPI](https://pypi.org/project/pip/)               |
+| PyPi - Python Package Index                           | [PyPI](https://pypi.org/)                                                               | pylibCZIrw - Python Package to read & write CZI files | [PyPI](https://pypi.org/project/pylibCZIrw)         |
+| pylibCZIrw - GitHub Repository for CZI files (Python) | [GitHub](https://github.com/ZEISS/pylibczirw)                                           | czmodel - Package for Pytorch & ONNX models           | [PyPI](https://pypi.org/project/czmodel)            |
+| cztile - Python Package for tiling arrays             | [PyPI](https://pypi.org/project/cztile)                                                 | arivis Cloud - DL Training Platform                   | [arivis Cloud](https://www.arivis.cloud)            |
+| napari-czann-segment - Napari Plugin for DL models    | [GitHub](https://github.com/sebi06/napari_czann_segment)                                | napari-czitools - Plugin for CZI files                | [GitHub](https://github.com/sebi06/napari-czitools) |
+| CZI - Carl Zeiss Image Format                         | [ZEISS](https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html) | PyTorch                                               | [PyTorch](https://pytorch.org)                      |
+| ONNX                                                  | [ONNX](https://onnx.ai)                                                                 | libCZI - GitHub Repository for CZI files (C++)        | [GitHub](https://github.com/ZEISS/libczi)           |
+| czitools - Tools for CZI files                        | [PyPI](https://pypi.org/project/czitools)                                               | Colab                                                 | [Colab](https://colab.research.google.com)          |
+| Docker Desktop                                        | [Docker Desktop](https://www.docker.com/products/docker-desktop)                        | CZICompress - Shrink CZI files                        | [GitHub](https://github.com/ZEISS/czicompress)      |
+| CZIChecker - Check Integrity of CZI files             | [GitHub](https://github.com/ZEISS/czicheck)                                             | ome-zarr - Python Implementation of NGFF Specs        | [GitHub](https://github.com/ome/ome-zarr-py)        |
+| NGFF - Next-generation File Formats                   | [NGFF](https://ngff.openmicroscopy.org/)                                                | ngff-zarr - Python Implementation of NGFF Specs       | [GitHub](https://github.com/fideus-labs/ngff-zarr)  |
+
+---
 
 [Napari]: https://github.com/napari/napari
 [pip]: https://pypi.org/project/pip/
-[PyPi]: https://pypi.org/
-[pylibCZIrw]: https://pypi.org/project/pylibCZIrw/
-[czmodel]: https://pypi.org/project/czmodel/
-[cztile]: https://pypi.org/project/cztile/
-[arivis Cloud]: https://www.apeer.com
+[pylibCZIrw]: https://pypi.org/project/pylibCZIrw
+[pylibCZIrw_github]: https://github.com/ZEISS/pylibczirw
+[czmodel]: https://pypi.org/project/czmodel
+[arivis Cloud]: https://www.arivis.cloud
 [napari-czann-segment]: https://github.com/sebi06/napari_czann_segment
-[CZI]: https://www.zeiss.com/microscopy/int/products/microscope-software/zen/czi.html
-[PyTorch]: https://pytorch.org/
-[TensorFlow]: https://www.tensorflow.org/
-[ONNX]: https://onnx.ai/
-[libCZI]: https://github.com/ZEISS/libczi/
-[czitools]: https://pypi.org/project/czitools/
-[Colab]: https://colab.research.google.com/
-[Docker Desktop]: https://www.docker.com/products/docker-desktop/
-[CZICompress]: https://github.com/ZEISS/czicompress/
-[CZIChecker]: https://github.com/ZEISS/czicheck/
+[napari-czitools]: https://github.com/sebi06/napari-czitools
+[PyTorch]: https://pytorch.org
+[ONNX]: https://onnx.ai
+[libCZI]: https://github.com/ZEISS/libczi
+[czitools]: https://pypi.org/project/czitools
+[Colab]: https://colab.research.google.com
+[Docker Desktop]: https://www.docker.com/products/docker-desktop
+[CZICompress]: https://github.com/ZEISS/czicompress
+[ome-zarr]: https://github.com/ome/ome-zarr-py
+[ngff-zarr]: https://github.com/fideus-labs/ngff-zarr
