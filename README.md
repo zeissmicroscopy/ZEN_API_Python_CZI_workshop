@@ -7,7 +7,7 @@
     - [Install python base  environment (miniconda etc.)](#install-python-base--environment-miniconda-etc)
   - [ZEN API](#zen-api)
     - [ZEN API - General Information](#zen-api---general-information)
-    - [ZEN API - ZEN Blu 3.12 - Documentation](#zen-api---zen-blu-312---documentation)
+    - [ZEN API - ZEN Blue 3.12 - Documentation](#zen-api---zen-blue-312---documentation)
     - [ZEN API Python Examples](#zen-api-python-examples)
       - [ShowCase: Pixel Stream and Online Processing](#showcase-pixel-stream-and-online-processing)
       - [ShowCase: Guided Acquisition](#showcase-guided-acquisition)
@@ -79,7 +79,7 @@ conda env create --file env_smartmic.yml
 
 - See: **[ZEN API -General Information](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/README.md)**
 
-### ZEN API - ZEN Blu 3.12 - Documentation
+### ZEN API - ZEN Blue 3.12 - Documentation
 
 - See: **[ZEN API Documentation](https://github.com/zeiss-microscopy/OAD/blob/master/ZEN-API/documentation/ZEN_API_Documentation_20250509.md)**
 
